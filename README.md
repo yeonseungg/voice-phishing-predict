@@ -61,4 +61,8 @@ SARIMAX 모형이 계절성과 외생변수를 함께 고려함으로써 예측 
 
 정책 수립, 수사 자원 배분, 예방 교육 강화 등 실질적 대응 전략 수립에 활용 가능
 
+## 예측 결과
+![image](https://github.com/user-attachments/assets/4072762f-a92e-485f-be49-40cd6c8f1c10)
+
+
 
