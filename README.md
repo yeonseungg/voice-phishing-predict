@@ -1,57 +1,86 @@
-# 보이스피싱 발생 추이 예측을 위한 시계열 모형 연구: 계절성과 외생변수 활용
-Time series models for predicting the trend of voice phishing: seasonality and exogenous variables approaches
+# 🔍 보이스피싱 발생 추이 예측을 위한 시계열 모형 연구  
+**Time Series Models for Predicting the Trend of Voice Phishing: Seasonality and Exogenous Variables Approaches**  
+[📄 논문 보기](http://www.kcgsa.org/html/sub0501.html?pageNm=article&journal=1&code=452769&issue=0&Page=1&year=2024&searchType=title&searchValue=%EB%B3%B4%EC%9D%B4%EC%8A%A4%ED%94%BC%EC%8B%B1%20%EB%B0%9C%EC%83%9D%20%EC%B6%94%EC%9D%B4%20%EC%98%88%EC%B8%A1%EC%9D%84%20%EC%9C%84%ED%95%9C%20%EC%8B%9C%EA%B3%84%EC%97%B4%20%EB%AA%A8%ED%98%95%20%EC%97%B0%EA%B5%AC:%20%EA%B3%84%EC%A0%88%EC%84%B1%EA%B3%BC%20%EC%99%B8%EC%83%9D%EB%B3%80%EC%88%98%20%ED%99%9C%EC%9A%A9)
 
-[논문 링크](http://www.kcgsa.org/html/sub0501.html?pageNm=article&journal=1&code=452769&issue=0&Page=1&year=2024&searchType=title&searchValue=%EB%B3%B4%EC%9D%B4%EC%8A%A4%ED%94%BC%EC%8B%B1%20%EB%B0%9C%EC%83%9D%20%EC%B6%94%EC%9D%B4%20%EC%98%88%EC%B8%A1%EC%9D%84%20%EC%9C%84%ED%95%9C%20%EC%8B%9C%EA%B3%84%EC%97%B4%20%EB%AA%A8%ED%98%95%20%EC%97%B0%EA%B5%AC:%20%EA%B3%84%EC%A0%88%EC%84%B1%EA%B3%BC%20%EC%99%B8%EC%83%9D%EB%B3%80%EC%88%98%20%ED%99%9C%EC%9A%A9)
+---
 
+## 📌 개요
 
-## 📌 연구 목적
-보이스피싱 발생건수의 정확한 예측을 위하여 시계열 모형 비교 분석
+보이스피싱은 단순한 금전적 피해를 넘어 정신적 고통까지 유발하는 심각한 범죄이다. 피해 범위가 특정 연령대를 넘어 전 연령층으로 확대됨에 따라, 이에 대한 **정확한 예측 및 선제적 대응**이 필요하다.
 
-기존의 ARIMA, SARIMA 모형 외에 피해액, 검거건수, 검거인원 등의 외생변수를 추가한 SARIMAX 모형의 예측 성능을 검증
+본 프로젝트에서는 기존 시계열 분석에서 사용되던 ARIMA, SARIMA 모델을 넘어, **외생변수(피해액, 검거건수, 검거인원)**를 반영한 **SARIMAX 모델**을 적용하여 예측 정확도를 향상시키고자 하였다.
 
-## 📊 사용 데이터
-기간: 2016년 1월 ~ 2023년 10월 (월별 데이터, 총 94개)
+---
 
-출처: 경찰청 (정보공개포털)
+## 📅 프로젝트 개요
 
-변수: 발생건수 (종속변수), 피해액, 검거건수, 검거인원 (외생변수)
+- **진행 기간**: 2023.11 ~ 2023.12  
+- **참여 형태**: 팀 프로젝트  
+- **역할**: 주제 선정, 데이터 수집, 정상성 검정, 모델 개발 및 최적화, 논문 작성 전반
 
-## 🧪 분석 모델
+---
 
-* ARIMA(p,d,q) - 자기회귀, 차분, 이동평균을 결합한 전통적 시계열 모형
+## 🛠 기술 스택 및 도구
 
-* SARIMA(p,d,q)(P,D,Q,s) - 계절성 반영 시계열 모형
+- **언어 및 환경**: Python, Jupyter Notebook  
+- **데이터 수집**: 경찰청 국민신문고 (공공데이터 포털)  
+- **분석 라이브러리**: `pandas`, `numpy`, `statsmodels`, `pmdarima` (`auto_arima`), `matplotlib`, `seaborn`  
+- **정상성 및 계절성 분석**: ADF Test, 시계열 분해  
+- **성능 평가 지표**: AIC, BIC, RMSE, MAE, MAPE, Ljung-Box 잔차 검정
 
-* SARIMAX(p,d,q)(P,D,Q,s) - 외생변수 포함 계절 시계열 모형
+---
 
-## 분석 과정 요약
-정상성 검정: ADF Test를 통해 1차 일반 차분(d=1), 계절 차분(D=1) 수행   
+## 📊 데이터 개요
 
-모델 적합성 비교: AIC, BIC, RMSE, MAE, MAPE, Ljung-Box 잔차 검정 사용   
+- **기간**: 2016년 1월 ~ 2023년 10월 (월별 94개 데이터)  
+- **출처**: 경찰청 정보공개포털  
+- **변수**
+  - 종속변수: 발생건수
+  - 외생변수: 피해액, 검거건수, 검거인원
 
-최종 선정 모형: SARIMAX(2,1,1)(0,1,1,4)   
+---
 
-외생변수: 피해액, 검거건수, 검거인원   
+## 🔍 분석 모델 및 과정 요약
+
+1. **기본 모델 구성**
+   - ARIMA, SARIMA, SARIMAX 비교
+2. **정상성 검정**
+   - ADF Test: 일반 차분(d=1), 계절 차분(D=1) 수행
+3. **모델 선택**
+   - `auto_arima`를 사용하여 파라미터 자동 탐색
+4. **모형 적합성 평가**
+   - AIC, BIC, RMSE, MAE, MAPE, Ljung-Box test
+5. **최종 선정 모형**
+   - **SARIMAX(2,1,1)(0,1,1,4)**
+
+---
 
 ## 📈 주요 결과
+
 | 모델     | AIC    | RMSE   | MAE    | MAPE   | 적합성     |
 |----------|--------|--------|--------|--------|------------|
 | ARIMA    | 1389.3 | 429.1  | 337.4  | 16.2%  | 낮음       |
 | SARIMA   | 1327.6 | 416.2  | 332.7  | 16.8%  | 보통       |
-| SARIMAX  | 1214.3 | 226.2  | 179.7  | 9.5%   | 가장 우수  |
+| **SARIMAX**  | **1214.3** | **226.2**  | **179.7**  | **9.5%**   | **가장 우수**  |
 
-예측기간: 2024년 12월까지의 보이스피싱 발생건수 예측   
+- **예측 기간**: 2023년 11월 ~ 2024년 12월  
+- **신뢰도 분석**: 예측 신뢰구간(80%, 95%) 포함 → 경험적 포함확률 높음
 
-예측 신뢰구간(80%, 95%) 및 경험적 포함확률 분석 결과 → 신뢰성 높음
-![image](https://github.com/user-attachments/assets/6f906c59-ddb6-426c-8aea-8499bb39d2d5)
+> ![예측 그래프](https://github.com/user-attachments/assets/6f906c59-ddb6-426c-8aea-8499bb39d2d5)
 
+---
 
 ## ✅ 결론 및 기여
-SARIMAX 모형이 계절성과 외생변수를 함께 고려함으로써 예측 성능을 크게 향상시킴
 
-기존 연구 대비 예측오차(RMSE, MAE, MAPE) 모두 현저히 개선됨
+- **SARIMAX 모델**을 통해 외생변수와 계절성을 반영한 예측 정확도 대폭 향상
+- 기존 ARIMA 기반 연구 대비 모든 지표에서 예측오차 개선
+- 실질적인 활용 가능성:
+  - **수사 자원 배분 전략**
+  - **예방 교육 캠페인 기획**
+  - **시기별 집중 단속 기준 설정**
 
-정책 수립, 수사 자원 배분, 예방 교육 강화 등 실질적 대응 전략 수립에 활용 가능
+---
+
 
 ## 예측 결과
 
